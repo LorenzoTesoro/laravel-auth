@@ -17,8 +17,6 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::orderByDesc('id')->get(); // recupero tutti i progetti ordinati per id
-
-        //dd($projects);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -70,7 +68,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**

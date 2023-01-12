@@ -28,7 +28,7 @@
                 <td>{{$project->slug}}</td>
                 <td>
                     <a name="" id="" class="btn btn-primary btn-sm" href="{{route('admin.projects.show', $project->slug)}}" role="button"><i class="fas fa-eye fa-sm fa-fw"></i></a>
-                    <i class="fas fa-pencil fa-sm fa-fw"></i>
+                    <a name="" id="" class="btn btn-primary btn-sm" href="{{route('admin.projects.edit', $project->slug)}}" role="button"><i class="fas fa-pencil fa-sm fa-fw"></i></a>
                     <i class="fas fa-trash fa-sm fa-fw"></i>
                 </td>
             </tr>
