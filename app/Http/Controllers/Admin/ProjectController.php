@@ -43,7 +43,12 @@ class ProjectController extends Controller
         $val_data = $request->validated();
         //dd($val_data);
         // save input cover_image
-        $cover_image = Storage::put('uploads', $val_data['cover_image']);
+        if ($request->hasFile('cover_image')) {
+            $cover_image = Storage::put('uploads', $val_data['cover_image']);
+            //dd($cover_image);
+            // replace the value of cover_image inside $val_data
+            $val_data['cover_image'] = $cover_image;
+        }
         //replace the value of cover_image inside $val_data
         $val_data['cover_image'] = $cover_image;
         // generate project slug
@@ -88,9 +93,22 @@ class ProjectController extends Controller
     {
         $val_data = $request->validated();
 
-        // generate project slug
+        // check if the request has a cover_image field
+        if ($request->hasFile('cover_image')) {
+            // check if the current project has an image if yes, delete it
+            if ($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+            $cover_image = Storage::put('uploads', $val_data['cover_image']);
+            // replace the value of cover_image inside $val_data
+            $val_data['cover_image'] = $cover_image;
+        }
+
+        // upadate project slug
         $project_slug = Project::generateSlug($val_data['title']);
         $val_data['slug'] = $project_slug;
+
+        // update resource
         $project->update($val_data);
 
         return to_route('admin.projects.index')->with('message', 'Project updated successfully');
