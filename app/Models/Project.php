@@ -11,7 +11,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'slug']; // per assegnare in blocco le proprietà, crea l'ogg. con tutte le props assegnate con i valori che gli abbiamo passato
+    protected $fillable = ['title', 'cover_image', 'description', 'slug']; // per assegnare in blocco le proprietà, crea l'ogg. con tutte le props assegnate con i valori che gli abbiamo passato
 
 
     /* funzione di tipo utility per generare qui lo slug
